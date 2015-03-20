@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\haverford_remote_data\RemoteData;
+namespace jlandfried;
 
 use Doctrine\Common\Cache\CacheProvider;
 
