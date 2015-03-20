@@ -28,3 +28,6 @@ $storage = array('storage' => new \GuzzleHttp\Subscriber\Cache\CacheStorage($doc
 
 // Do stuff with your guzzle client...
 ```
+
+
+I don't claim that this package is complete, so bug reports are welcome.
