@@ -30,4 +30,4 @@ $storage = array('storage' => new \GuzzleHttp\Subscriber\Cache\CacheStorage($doc
 ```
 
 
-I don't claim that this package is complete, so bug reports are welcome.
+I don't claim that this package is complete, bug reports are welcome.
