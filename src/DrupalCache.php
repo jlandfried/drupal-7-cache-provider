@@ -27,10 +27,28 @@ class DrupalCache extends CacheProvider
   protected function doFetch($id)
   {
     $cache = $this->drupalCache->get($this->prepareId($id));
+    if ($cache) {
+      $this->cleanup($cache, $id);
+    }
     if (isset($cache->data)) {
       return $cache->data;
     }
     return FALSE;
+  }
+
+  /**
+   * Clean up expired cache items.
+   *
+   * @param $cache
+   *   Cache object.
+   * @param $id
+   *   Identifier used (before running it through prepareId().
+   */
+  protected function cleanup($cache, $id)
+  {
+    if ($cache->expire && ($cache->expire - REQUEST_TIME < 0)) {
+      $this->doDelete($id);
+    }
   }
 
   /**
@@ -47,6 +65,9 @@ class DrupalCache extends CacheProvider
    */
   protected function doSave($id, $data, $lifeTime = 0)
   {
+    if ($lifeTime) {
+      $lifeTime = REQUEST_TIME + $lifeTime;
+    }
     $this->drupalCache->set($this->prepareId($id), $data, $lifeTime);
 
     return TRUE;
